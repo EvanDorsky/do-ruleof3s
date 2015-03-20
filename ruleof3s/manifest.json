@@ -1,0 +1,25 @@
+{
+	"name": "Rule of Threes",
+	"short_name": "RuleOfThrees",
+	"description": "Allows you to place a rectangle anywhere on a page to better understand internet cinematography.",
+	"version": "1.0",
+
+	"permissions": [
+		"activeTab"
+	],
+	"background": {
+		"scripts": ["click.js"],
+		"persistent": false
+	},
+	"content_scripts": [
+		{
+			"js": ["click.js"]
+		}
+	],
+	"browser_action": {
+		"default_title": "Rule of threes",
+		"default_icon": "icon.png"
+	},
+
+	"manifest_version": 2
+}
