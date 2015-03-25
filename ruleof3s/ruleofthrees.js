@@ -1,21 +1,44 @@
 (function() {
 	$('body').prepend('<canvas style="margin:0;padding:0;position:absolute;z-index:99999" id="overlay"></canvas>');
 
-	var canvas = document.getElementById('overlay');
+	window.canvas = document.getElementById('overlay');
 
-	$(window).on('resize', function() {
+	function handleUp() {
+		window.mouseDown = false;
+		window.x = null;
+		window.y = null;
+	}
+
+	function resizeCanvas() {
 		canvas.height = $(window).height();
 		canvas.width = $(window).width();
-		
-		drawRect(ctx, 20, 20, 200, 200);	
+	}
+
+	handleUp();
+	resizeCanvas();
+
+	window.ctx = canvas.getContext('2d');
+
+	$(window).on('resize', resizeCanvas);
+
+	$(window).on('mousemove', function(e) {
+		if (!window.mouseDown)
+			return;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		drawRect(ctx, window.x, window.y, event.pageX-window.x, event.pageY-window.y);
 	});
 
-	var ctx = canvas.getContext('2d');
+	$(window).on('mousedown', function(e) {
+		window.mouseDown = true;
+		window.x = event.pageX;
+		window.y = event.pageY;
+	});
 
-	drawRect(ctx, 20, 20, 200, 200);
+	$(window).on('mouseup', handleUp);
 
 	function drawRect(ctx, x, y, w, h) {
 		ctx.strokeStyle = 'black';
+		ctx.beginPath()
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 3; j++) {
 				ctx.rect(x+i*w/3, y+j*h/3, w/3, h/3);

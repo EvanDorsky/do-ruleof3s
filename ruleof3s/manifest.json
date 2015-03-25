@@ -13,7 +13,8 @@
 	},
 	"content_scripts": [
 		{
-			"js": ["click.js"]
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["jquery.min.js", "ruleofthrees.js"]
 		}
 	],
 	"browser_action": {
