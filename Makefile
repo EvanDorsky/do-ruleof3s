@@ -1,4 +1,4 @@
-name = heat-pack
+name = ruleof3s
 
 zip: $(name).zip
 
